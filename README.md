@@ -9,3 +9,4 @@ Using Unreal 4.13.1
 * 01_Initial Commit
 * 02_DisabledVR
 * 03_Cleaned Directories
+* 04_Adding 3rd Person and Nav Mesh
