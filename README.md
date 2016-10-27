@@ -13,3 +13,4 @@ Using Unreal 4.13.1
 * 05_Introducing AI Behaviour Tree
 * 06_Introducing AI Blackboards
 * 07_Target Points
+* 08_Using Any Actor for Waypoints
