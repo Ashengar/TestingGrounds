@@ -12,3 +12,4 @@ Using Unreal 4.13.1
 * 04_Adding 3rd Person and Nav Mesh
 * 05_Introducing AI Behaviour Tree
 * 06_Introducing AI Blackboards
+* 07_Target Points
