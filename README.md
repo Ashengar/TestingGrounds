@@ -15,3 +15,4 @@ Using Unreal 4.13.1
 * 07_Target Points
 * 08_Using Any Actor for Waypoints
 * 09_Grouping
+* 10_Patrol Route
