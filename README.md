@@ -4,7 +4,7 @@ A Hunger-Games inspired FPS with large outdoor terrains. Advanced AI, basic netw
 
 An Unreal course by Ben Tristrim
 
-Using Unreal 4.13.1
+Using Unreal 4.13.2
 
 * 01_Initial Commit
 * 02_DisabledVR
@@ -18,3 +18,4 @@ Using Unreal 4.13.1
 * 10_Patrol Route
 * 11_BehaviourTree and Blackboard in C++
 * 12_Inhertitance Issue
+* 13_Patrol Route in C++
