@@ -17,3 +17,4 @@ Using Unreal 4.13.1
 * 09_Grouping
 * 10_Patrol Route
 * 11_BehaviourTree and Blackboard in C++
+* 12_Inhertitance Issue
