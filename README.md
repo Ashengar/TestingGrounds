@@ -19,3 +19,4 @@ Using Unreal 4.13.2
 * 11_BehaviourTree and Blackboard in C++
 * 12_Inhertitance Issue
 * 13_Patrol Route in C++
+* 14_Deleting C++ Class
