@@ -23,3 +23,4 @@ Using Unreal 4.13.2
 * 15_AI Peception
 * 16_Sight and Hearing
 * 17_Animation Starter Pack
+* 18_Patrolling Guard v2
