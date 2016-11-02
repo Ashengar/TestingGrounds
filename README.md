@@ -24,3 +24,4 @@ Using Unreal 4.13.2
 * 16_Sight and Hearing
 * 17_Animation Starter Pack
 * 18_Patrolling Guard v2
+* 19_Adding waypoints and animations
