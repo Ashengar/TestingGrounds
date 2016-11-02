@@ -22,3 +22,4 @@ Using Unreal 4.13.2
 * 14_Deleting C++ Class
 * 15_AI Peception
 * 16_Sight and Hearing
+* 17_Animation Starter Pack
