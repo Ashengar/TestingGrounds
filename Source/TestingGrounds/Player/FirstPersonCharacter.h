@@ -1,32 +1,50 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
-#include "FP_FirstPersonCharacter.generated.h"
+#include "FirstPersonCharacter.generated.h"
 
 class UInputComponent;
-class UCameraComponent;
-class USkeletalMeshComponent;
-class USoundBase;
-class UAnimMontage;
 
 UCLASS(config=Game)
-class AFP_FirstPersonCharacter : public ACharacter
+class AFirstPersonCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
-	USkeletalMeshComponent* Mesh1P;
+	class USkeletalMeshComponent* Mesh1P;
 
+	/** Gun mesh: 1st person view (seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	USkeletalMeshComponent* FP_Gun;
+	class USkeletalMeshComponent* FP_Gun;
+
+	/** Location on gun mesh where projectiles should spawn. */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USceneComponent* FP_MuzzleLocation;
+
+	/** Gun mesh: VR view (attached to the VR controller directly, no arm, just the actual gun) */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USkeletalMeshComponent* VR_Gun;
+
+	/** Location on VR gun mesh where projectiles should spawn. */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USceneComponent* VR_MuzzleLocation;
 
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* FirstPersonCameraComponent;
+	class UCameraComponent* FirstPersonCameraComponent;
 
+	/** Motion controller (right hand) */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UMotionControllerComponent* R_MotionController;
+
+	/** Motion controller (left hand) */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UMotionControllerComponent* L_MotionController;
 public:
-	AFP_FirstPersonCharacter();
+	AFirstPersonCharacter();
+
+	virtual void BeginPlay();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -40,34 +58,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
 	FVector GunOffset;
 
+	/** Projectile class to spawn */
+	UPROPERTY(EditDefaultsOnly, Category=Projectile)
+	TSubclassOf<class ABallProjectile> ProjectileClass;
+
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
-	USoundBase* FireSound;
+	class USoundBase* FireSound;
 
 	/** AnimMontage to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	UAnimMontage* FireAnimation;
+	class UAnimMontage* FireAnimation;
 
-	/* This is when calculating the trace to determine what the weapon has hit */
+	/** Whether to use motion controller location for aiming. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	float WeaponRange;
-	
-	/* This is multiplied by the direction vector when the weapon trace hits something to apply velocity to the component that is hit */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	float WeaponDamage;
+	uint32 bUsingMotionControllers : 1;
 
 protected:
-
-	/** Handler for a touch input beginning. */
-	void TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location);
-
-	/** Fires a virtual projectile. */
+	
+	/** Fires a projectile. */
 	void OnFire();
+
+	/** Resets HMD orientation and position in VR. */
+	void OnResetVR();
 
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
-	/** Handles strafing movement, left and right */
+	/** Handles stafing movement, left and right */
 	void MoveRight(float Val);
 
 	/**
@@ -82,66 +100,31 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
-	/* 
-	 * Performs a trace between two points
-	 * 
-	 * @param	StartTrace	Trace starting point
-	 * @param	EndTrac		Trace end point
-	 * @returns FHitResult returns a struct containing trace result - who/what the trace hit etc.
-	 */
-	FHitResult WeaponTrace(const FVector& StartTrace, const FVector& EndTrace) const;
-
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-	// End of APawn interface
-
-	// Structure that handles touch data so we can process the various stages of touch
 	struct TouchData
 	{
-		TouchData() { bIsPressed = false; Location = FVector::ZeroVector; }
+		TouchData() { bIsPressed = false;Location=FVector::ZeroVector;}
 		bool bIsPressed;
 		ETouchIndex::Type FingerIndex;
 		FVector Location;
 		bool bMoved;
 	};
-
-	/*
-	 * Handle begin touch event.
-	 * Stores the index and location of the touch in a structure
-	 *
-	 * @param	FingerIndex	The touch index
-	 * @param	Location	Location of the touch
-	 */
 	void BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
-	
-	/*
-	 * Handle end touch event.
-	 * If there was no movement processed this will fire a projectile, otherwise this will reset pressed flag in the touch structure
-	 *
-	 * @param	FingerIndex	The touch index
-	 * @param	Location	Location of the touch
-	 */
 	void EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
-	
-	/*
-	 * Handle touch update.
-	 * This will update the look position based on the change in touching position
-	 *
-	 * @param	FingerIndex	The touch index
-	 * @param	Location	Location of the touch
-	 */
 	void TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location);
-
-	// Structure to handle touch updating
 	TouchData	TouchItem;
 	
+protected:
+	// APawn interface
+	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+	// End of APawn interface
+
 	/* 
 	 * Configures input for touchscreen devices if there is a valid touch interface for doing so 
 	 *
 	 * @param	InputComponent	The input component pointer to bind controls to
 	 * @returns true if touch controls were enabled.
 	 */
-	void TryEnableTouchscreenMovement(UInputComponent* InputComponent);
+	bool EnableTouchscreenMovement(UInputComponent* InputComponent);
 
 public:
 	/** Returns Mesh1P subobject **/
