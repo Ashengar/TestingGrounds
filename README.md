@@ -25,3 +25,4 @@ Using Unreal 4.13.2
 * 17_Animation Starter Pack
 * 18_Patrolling Guard v2
 * 19_Adding waypoints and animations
+* 20_Refactoring in UE4 Editor
