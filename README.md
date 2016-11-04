@@ -28,3 +28,4 @@ Using Unreal 4.13.2
 * 20_Refactoring in UE4 Editor
 * 21_Renaming and Moving CPP
 * 22_Animation, State Machinbes & Blend Spaces
+* 23_Aim Offset
