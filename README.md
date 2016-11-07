@@ -31,3 +31,4 @@ Using Unreal 4.13.2
 * 23_Aim Offset
 * 24_AI Aiming At Player
 * 25_Tree Decorators
+* 26_Behaviour Tree Services
