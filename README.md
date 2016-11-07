@@ -29,3 +29,4 @@ Using Unreal 4.13.2
 * 21_Renaming and Moving CPP
 * 22_Animation, State Machinbes & Blend Spaces
 * 23_Aim Offset
+* 24_AI Aiming At Player
