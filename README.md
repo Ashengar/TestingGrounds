@@ -32,3 +32,4 @@ Using Unreal 4.13.2
 * 24_AI Aiming At Player
 * 25_Tree Decorators
 * 26_Behaviour Tree Services
+* 27_Tweaking AI Behaviour
