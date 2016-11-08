@@ -35,6 +35,8 @@ class AFirstPersonCharacter : public ACharacter
 	/** Motion controller (left hand) */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
+
+
 public:
 	AFirstPersonCharacter();
 
@@ -53,12 +55,13 @@ public:
 	FVector GunOffset;
 
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<class AGun> GunBlueprint;
 
-
-
+private:
+	AGun * Gun;
 
 protected:
-
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
