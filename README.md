@@ -34,3 +34,4 @@ Using Unreal 4.13.2
 * 26_Behaviour Tree Services
 * 27_Tweaking AI Behaviour
 * 28_Creating a Gun
+* 29_Attaching Actors to Components
