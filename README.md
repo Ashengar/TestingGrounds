@@ -36,3 +36,4 @@ Using Unreal 4.13.2
 * 28_Creating a Gun
 * 29_Attaching Actors to Components
 * 30_Configuring the Gun
+* 31_Moving Files into Static Folder
