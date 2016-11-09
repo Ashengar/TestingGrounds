@@ -37,3 +37,4 @@ Using Unreal 4.13.2
 * 29_Attaching Actors to Components
 * 30_Configuring the Gun
 * 31_Moving Files into Static Folder
+* 32_Moved some Assests into non LFS folder
