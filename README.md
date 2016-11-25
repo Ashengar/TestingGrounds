@@ -40,3 +40,4 @@ Using Unreal 4.13.2
 * 32_Moved some Assests into non LFS folder
 * 33_Child Actor Component (Gun)
 * 34_Kinematic Inverse
+* 35_Aiming and Shooting Anims
