@@ -42,3 +42,4 @@ Using Unreal 4.13.2
 * 34_Kinematic Inverse
 * 35_Aiming and Shooting Anims
 * 36_TakingDamage
+* 37_First and Third Person View
