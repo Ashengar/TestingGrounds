@@ -41,3 +41,4 @@ Using Unreal 4.13.2
 * 33_Child Actor Component (Gun)
 * 34_Kinematic Inverse
 * 35_Aiming and Shooting Anims
+* 36_TakingDamage
